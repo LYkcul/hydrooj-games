@@ -1,0 +1,11 @@
+{
+    "name": "hydrooj-games",
+    "version": "0.0.1",
+    "description": "Hydro Games",
+    "main": "index.js",
+    "author": "Yuckl",
+    "license": "GPL-3.0",
+    "peerDependencies": {
+    }
+  }
+  

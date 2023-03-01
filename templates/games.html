@@ -1,0 +1,86 @@
+{% set page_name = "games" %}
+{% extends "layout/basic.html" %}
+{% block content %}
+<div class="section">
+    <div class="section__header">
+        <style>
+            .game-title button small{
+                font-size: 1rem;
+            }
+        </style>
+        <h2 class="section__title game-title">摸鱼达人 <button onclick="start_cat()"><small>捉猫猫</small></button> <button onclick="start_tetris()"><small>俄罗斯方块</small></button> <button onclick="start_pacman()"><small>吃豆人</small></button> <button onclick="start_2048()"><small>2048</small></button> <button onclick="start_battle_city()"><small>坦克大战</small></button></h2>
+    </div>
+    <div class="section__body">
+        <div class="game_notfound">
+            <div class="nothing-placeholder">
+  <div class="nothing-icon"></div>
+  请在上方选择游戏以开始摸鱼。<br><br>
+  Powered by <a href="https://sgoj.cn/">SGOJ</a>.
+</div>
+
+        </div>
+        <div class="game_container" id="catch-the-cat" style="display:flex;flex:1;justify-content:center;"></div>
+        <div style="display:flex;flex:1;background-color:#000;">
+            <div class="game_container" id="tetris" style="display:none;width:360px;height:540px;"></div>
+        </div>
+        <div class="game_container" id="iframe" style="display:none;">
+            <iframe id="iframe_container" style=""></iframe>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/gh/ganlvtech/phaser-catch-the-cat@gh-pages/phaser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ganlvtech/phaser-catch-the-cat@gh-pages/catch-the-cat.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/gh/Aerolab/blockrain.js@gh-pages/dist/blockrain.css" rel="stylesheet" />
+    <script src="https://unpkg.zhimg.com/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Aerolab/blockrain.js@gh-pages/dist/blockrain.jquery.min.js"></script>
+    <script>
+    var jq = jQuery.noConflict();
+    function start_cat(){
+        jq(".game_notfound").hide();
+        jq(".game_container").hide();
+        jq("#catch-the-cat").css('display','flex');
+        if(window.game) return 0;
+        window.game = new CatchTheCatGame({
+            w: 14,
+            h: 12,
+            r: 20,
+            backgroundColor: 0xffffff,
+            parent: 'catch-the-cat',
+            statusBarAlign: 'center',
+            credit: '适度游戏益脑 沉迷游戏伤身'
+        });
+    }
+    function start_tetris(){
+        jq(".game_notfound").hide();
+        jq(".game_container").hide();
+        jq('#tetris').show();
+        jq('#tetris').blockrain({
+            speed: 16,
+            theme: 'vim',
+            blockWidth: 12,
+        });
+    }
+    function start_pacman(){
+        jq(".game_notfound").hide();
+        jq(".game_container").hide();
+        jq("#iframe").css('display','flex');
+        jq("#iframe_container").attr('style','width:576px;height:396px;border:0;overflow:hidden;');
+        jq("#iframe_container").attr('src','https://games1.sgoj.cn/pacman/index.html');
+    }
+    function start_2048(){
+        jq(".game_notfound").hide();
+        jq(".game_container").hide();
+        jq("#iframe").css('display','flex');
+        jq("#iframe_container").attr('style','width:100%;height:680px;border:0;overflow:hidden;');
+        jq("#iframe_container").attr('src','https://games1.sgoj.cn/2048/inpage.html');
+    }
+    function start_battle_city(){
+        jq(".game_notfound").hide();
+        jq(".game_container").hide();
+        jq("#iframe").css('display','flex');
+        jq("#iframe_container").attr('style','width:100%;height:500px;border:0;overflow:hidden;');
+        jq("#iframe_container").attr('src','https://games1.sgoj.cn/battle-city/mini.html');
+    }
+    </script>
+    </div>
+  </div>
+{% endblock %}
